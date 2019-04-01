@@ -7,48 +7,19 @@
             <h1><a href="/">Some key blogs</a></h1>
         </div>
 
-        <div>
-            <h2>Elasticsearch 6.7.0 released</h2>
-            <p>We are pleased to announce the release of Elasticsearch 6.7.0, based on Lucene 7.7.0. This is the latest stable release, and is already available for deployment via our Elasticsearch Service on Elastic Cloud.
-
-
-You can read about all the changes in the release notes, but here are our highlight:
-If it’s a 3-letter acronym in Elasticsearch, odds are it’s now Generally Available (GA) in 6.7!<p>
-
-
-<p>CCR (Cross Cluster Replication) is now GA!
-
-We introduced Cross Cluster Replication (CCR) as a beta feature in Elasticsearch 6.5. CCR was one of the most heavily requested features for Elasticsearch. We’re excited to announce CCR is now generally available and ready for production use in Elasticsearch 6.7! CCR has a variety of use cases, including cross-datacenter and cross-region replication, replicating data to get closer to the application server and user, and maintaining a centralized reporting cluster replicated from a large number of smaller clusters.
-
-In addition to maturing to a GA feature, there were a number of important technical advancements in CCR for 6.7. Previous versions of CCR required replication to start on new indices only: existing indices could not be replicated. CCR can now start replicating existing indices that have soft deletes enabled in 6.7. We introduced new technology to prevent a follower index from falling fatally far behind its leader index. We’ve added a management UI in Kibana for configuring remote clusters, indices to replicate, and index naming patterns for automatic replication (e.g. for replicating metricbeat-* indices). We’ve also added a monitoring UI for insight into CCR progress and alerting on errors. Check out the Getting started with cross cluster replication guide, or visit the reference documentation to learn more. Cross cluster replication is a platinum level feature, and is available through a 30-day trial license that can be activated either via an API or within Kibana.
-
-
-Elasticsearch Cross Cluster Replication UI within Kibana
- 
-SQL, including JDBC and ODBC drivers, is now GA!
-</p>
-        </div>
+        <div> 
+            {% for post in posts %}
+                <div>
+                    <p>Published: {{ post.published_date }}</p>
+                    <h2><a href="">{{ post.title }}</a></h2>
+                    <p>{{ post.text|linebreaksbr }}</p>
+                </div>  
+            {% endfor %}
+         </div>
 
         <div>
-            <p><em>Published: 03.26.2019</em></p>
 
-            <h2>Elastic Stack 6.6.0 Released</h2>
-            <p>6.6.0 has arrived!
-
-This release has new features across the stack that simplify how you manage and scale your cluster, faster geoshape indexing and querying with more efficient storage, and key improvements to Elasticsearch SQL, machine learning, Auditbeat, and more!
-
-The index lifecycle management feature breaks the lifecycle of an index into four phases: hot, warm, cold, and delete phase. You can define an index lifecycle policy which allows you to:
-
-    Have one primary shard on each hot node to maximize indexing throughput.
-    Replace the hot index with a new empty index as soon as the existing index is “full” or after a time period.
-    Move the old index to warm nodes, where it can be shrunk to a single shard and force-merged down to a single segment for optimized storage and querying.
-    Later, move the index to cold nodes for cheaper storage.
-
-APM is introducing agent metrics in the 6.6 release. The latest version of our agents will now automatically report system and process-level CPU and memory metrics, along with traces and errors.
-
-Filebeat adds a new NetFlow input, which can be used to receive these Netflow and IPFIX records over UDP. It supports NetFlow v1, v5, v6, v7, v8, v9 and IPFIX.
-
-</p>
+            
         </div>
     </body>
 </html>
